@@ -1,8 +1,9 @@
 package com.hbt.gd.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CoreUserDto {
+public class CoreUserDto implements Serializable {
     private Long id;
     private String userName;
     private String password;

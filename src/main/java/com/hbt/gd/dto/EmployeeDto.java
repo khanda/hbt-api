@@ -1,62 +1,28 @@
-package com.hbt.gd.entity;
+package com.hbt.gd.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "employee")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createDate", "updateDate"}, allowGetters = true)
-public class Employee  implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+/**
+ * Created by quyen on 05/02/2018.
+ */
+public class EmployeeDto implements Serializable {
     private Long id;
-    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "mid_name")
     private String midName;
-    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "department_id")
     private Long departmentId;
-    @Column(name = "code")
     private String code;
-    @Column(name = "account_id")
     private Long accountId;
-    @Column(name = "manager_id")
     private Long managerId;
-    @Column(name = "is_leader")
     private Integer isLeader;
-    @Column(name = "create_by")
     private String createBy;
-    @Column(name = "update_by")
     private String updateBy;
-    @Column(name = "create_date")
-    @CreatedDate
     private Date createDate;
-    @Column(name = "update_date")
-    @LastModifiedDate
     private Date updateDate;
-    @Column(name = "status")
     private Integer status;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", insertable = false, updatable = false)
-    @JsonIgnore
-    private Department department;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", insertable = false, updatable = false)
-    @JsonIgnore
-    private CoreUser account;
-
-    public Employee() {
-    }
+    private DepartmentDto department;
+    private CoreUserDto account;
 
     public Long getId() {
         return id;
@@ -170,19 +136,19 @@ public class Employee  implements Serializable {
         this.status = status;
     }
 
-    public Department getDepartment() {
+    public DepartmentDto getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(DepartmentDto department) {
         this.department = department;
     }
 
-    public CoreUser getAccount() {
+    public CoreUserDto getAccount() {
         return account;
     }
 
-    public void setAccount(CoreUser account) {
+    public void setAccount(CoreUserDto account) {
         this.account = account;
     }
 }

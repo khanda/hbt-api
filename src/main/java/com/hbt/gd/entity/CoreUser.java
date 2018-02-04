@@ -6,16 +6,17 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "core_user")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createDate", "updateDate"}, allowGetters = true)
-public class CoreUser {
+public class CoreUser implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @Column(name = "username")
     private String userName;
     @Column
@@ -36,7 +37,7 @@ public class CoreUser {
     private Date updateDate;
     @Column
     private int status;
-        //EAGER for dto
+    //EAGER for dto
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private UserRole userRole;
@@ -44,11 +45,11 @@ public class CoreUser {
     public CoreUser() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

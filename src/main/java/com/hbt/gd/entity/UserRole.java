@@ -2,10 +2,11 @@ package com.hbt.gd.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user_role")
-public class UserRole {
+public class UserRole  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

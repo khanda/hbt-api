@@ -1,6 +1,8 @@
 package com.hbt.gd.dto;
 
-public class UserRoleDto {
+import java.io.Serializable;
+
+public class UserRoleDto implements Serializable {
     private Long id;
     private String name;
     private String description;

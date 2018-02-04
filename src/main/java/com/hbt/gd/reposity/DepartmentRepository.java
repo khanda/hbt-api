@@ -1,6 +1,6 @@
 package com.hbt.gd.reposity;
 
-import com.my.db.Department;
+import com.hbt.gd.entity.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
