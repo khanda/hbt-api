@@ -35,4 +35,5 @@ public class User2 extends User {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

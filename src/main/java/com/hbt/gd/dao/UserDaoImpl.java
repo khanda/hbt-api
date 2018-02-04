@@ -1,6 +1,5 @@
 package com.hbt.gd.dao;
 
-import com.hbt.gd.entity.Note;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

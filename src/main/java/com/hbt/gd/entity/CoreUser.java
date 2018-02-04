@@ -20,25 +20,25 @@ public class CoreUser {
     private String userName;
     @Column
     private String password;
-    @Column
+    @Column(name = "role_id")
     private long roleId;
-    @Column
+    @Column(name = "create_by")
     private String createBy;
-    @Column
+    @Column(name = "update_by")
     private String updateBy;
-    @Column
+    @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createDate;
-    @Column
+    @Column(name = "update_date")
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updateDate;
     @Column
-    private Integer status;
+    private int status;
         //EAGER for dto
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "roleId", insertable = false, updatable = false)
+    @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private UserRole userRole;
 
     public CoreUser() {
@@ -116,11 +116,11 @@ public class CoreUser {
         this.userRole = userRole;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

@@ -1,7 +1,5 @@
 package com.hbt.gd.dao;
 
-import com.hbt.gd.entity.Note;
-
 import java.util.List;
 
 

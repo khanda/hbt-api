@@ -11,6 +11,8 @@ public class UserRole {
     private Long id;
     @Column
     private String name;
+    @Column
+    private String description;
 
     public Long getId() {
         return id;
@@ -34,5 +36,13 @@ public class UserRole {
     public UserRole(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
