@@ -4,8 +4,9 @@ import java.util.List;
 
 public class PagingData<T> {
     private Integer page;
-    private int itemPerPage;
+    private Integer pageSize;
     private Long total;
+    private Integer totalPages;
     private List<T> data;
 
     public Integer getPage() {
@@ -16,12 +17,12 @@ public class PagingData<T> {
         this.page = page;
     }
 
-    public int getItemPerPage() {
-        return itemPerPage;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public void setItemPerPage(int itemPerPage) {
-        this.itemPerPage = itemPerPage;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public Long getTotal() {
@@ -30,6 +31,14 @@ public class PagingData<T> {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
     }
 
     public List<T> getData() {

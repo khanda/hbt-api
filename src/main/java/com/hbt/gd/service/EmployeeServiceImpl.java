@@ -21,9 +21,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Page<Employee> getListEmployee(int page, int pageSize) {
         Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
         Pageable pageable = new PageRequest(page, pageSize, sort);
-
-        Page<Employee> employeePage = employeeRepository.findAll(pageable);
-
-        return employeePage;
+        return employeeRepository.findAll(pageable);
     }
 }

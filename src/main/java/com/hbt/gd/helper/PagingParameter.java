@@ -2,14 +2,14 @@ package com.hbt.gd.helper;
 
 public class PagingParameter {
     private Integer page;
-    private Integer itemPerPage;
+    private Integer pageSize;
 
     public PagingParameter() {
     }
 
-    public PagingParameter(Integer page, Integer itemPerPage) {
+    public PagingParameter(Integer page, Integer pageSize) {
         this.page = page;
-        this.itemPerPage = itemPerPage;
+        this.pageSize = pageSize;
     }
 
     public Integer getPage() {
@@ -20,11 +20,11 @@ public class PagingParameter {
         this.page = page;
     }
 
-    public Integer getItemPerPage() {
-        return itemPerPage;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public void setItemPerPage(Integer itemPerPage) {
-        this.itemPerPage = itemPerPage;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }

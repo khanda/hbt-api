@@ -1,44 +1,20 @@
-package com.hbt.gd.entity;
+package com.hbt.gd.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "department")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createDate", "updateDate"}, allowGetters = true)
-public class Department  implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+/**
+ * Created by quyen on 05/02/2018.
+ */
+public class DepartmentDto implements Serializable {
     private long id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "parent_id")
     private long parentId;
-    @Column(name = "create_by")
     private String createBy;
-    @Column(name = "update_by")
     private String updateBy;
-    @Column(name = "createDate")
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
     private Date create_date;
-    @Column(name = "updateDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
     private Date update_date;
-    @Column(name = "status")
     private int status;
-
-
-    public Department() {
-    }
 
     public long getId() {
         return id;

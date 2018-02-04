@@ -1,12 +1,13 @@
 package com.hbt.gd.controller;
 
 import com.hbt.gd.dto.CoreUserDto;
-import com.hbt.gd.dto.LoginDto;
 import com.hbt.gd.entity.CoreUser;
 import com.hbt.gd.entity.UserRole;
 import com.hbt.gd.enums.EnumStatus;
-import com.hbt.gd.exception.UserNotFoundException;
-import com.hbt.gd.helper.*;
+import com.hbt.gd.helper.MessageConstant;
+import com.hbt.gd.helper.PagingData;
+import com.hbt.gd.helper.PagingParameter;
+import com.hbt.gd.helper.SimpleResponse;
 import com.hbt.gd.service.CoreUserService;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
@@ -78,7 +79,7 @@ public class CoreUserController {
     PagingData<CoreUser> getListAccount(@RequestBody PagingParameter pagingParameter) {
         PagingData<CoreUser> pagingData = new PagingData<>();
         Integer page = pagingParameter.getPage();
-        Integer itemPerPage = pagingParameter.getItemPerPage();
+        Integer itemPerPage = pagingParameter.getPageSize();
 
         logger.info("getListAccount: page = " + page + ", max = " + itemPerPage);
 
@@ -88,7 +89,7 @@ public class CoreUserController {
 
         pagingData.setData(coreUsers);
         pagingData.setPage(page);
-        pagingData.setItemPerPage(itemPerPage);
+        pagingData.setPageSize(itemPerPage);
         pagingData.setTotal(count);
 
         return pagingData;
@@ -106,24 +107,4 @@ public class CoreUserController {
         return userService.delete(id);
     }
 
-    @PostMapping("/login")
-    public SimpleResponse2<String> login(@RequestBody LoginDto loginDto) {
-        boolean isValid = userService.login(loginDto.getUserName(), loginDto.getPassword());
-
-        if (isValid) {
-            String token = generateToken(loginDto);
-            SimpleResponse2<String> response2 = new SimpleResponse2<>();
-            response2.setData(token);
-            response2.setMessage("thanh cong");
-            response2.setStatus(EnumStatus.SUCCESS);
-            return response2;
-        } else {
-            throw new UserNotFoundException(loginDto.getUserName());
-        }
-    }
-
-    private String generateToken(LoginDto loginDto) {
-
-        return "abc";
-    }
 } 
