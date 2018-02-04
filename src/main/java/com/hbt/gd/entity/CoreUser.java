@@ -36,7 +36,7 @@ public class CoreUser {
     private Date updateDate;
     @Column
     private int status;
-        //EAGER for dto
+    //EAGER for dto
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private UserRole userRole;

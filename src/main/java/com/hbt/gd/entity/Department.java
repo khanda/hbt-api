@@ -1,4 +1,4 @@
-package com.my.db;
+package com.hbt.gd.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
