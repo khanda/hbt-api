@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-/**
+/**leader
  * Created by quyen on 05/02/2018.
  */
 @Service
@@ -19,8 +19,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Page<Employee> getListEmployee(int page, int pageSize) {
+        //page start at 0
+        int pageIndex = page - 1;
         Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
-        Pageable pageable = new PageRequest(page, pageSize, sort);
+        Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
         return employeeRepository.findAll(pageable);
     }
 }
