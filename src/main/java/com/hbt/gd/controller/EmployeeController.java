@@ -11,6 +11,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,7 +22,10 @@ import java.util.List;
  */
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value = "/api/employee", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+@RequestMapping(value = "/api/employee",
+        produces = {
+                MediaType.APPLICATION_JSON_VALUE,
+                MediaType.APPLICATION_FORM_URLENCODED_VALUE})
 public class EmployeeController {
     private final static Logger logger = Logger.getLogger(EmployeeController.class);
     @Autowired
@@ -29,10 +33,10 @@ public class EmployeeController {
 
     @PostMapping("/getList")
     public @ResponseBody
-    PagingData<EmployeeDto> getListAccount(@RequestBody PagingParameter pagingParameter) {
+    PagingData<EmployeeDto> getListEmployee(@RequestBody PagingParameter pagingParameter) {
         Integer page = pagingParameter.getPage();
         Integer pageSize = pagingParameter.getPageSize();
-        Page<Employee> employeePage = employeeService.getListEmployee(page, pageSize);
+        Page<Employee> employeePage = employeeService.getList(page, pageSize);
         List<Employee> employeeList = employeePage.getContent();
 
         PagingData<EmployeeDto> pagingData = new PagingData<>();
@@ -40,7 +44,8 @@ public class EmployeeController {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         for (Employee employee : employeeList) {
-            employee.getAccount().setPassword("");
+            if (null != employee && null != employee.getAccount())
+                employee.getAccount().setPassword("");
             employeeDtos.add(modelMapper.map(employee, EmployeeDto.class));
 
         }
@@ -50,5 +55,14 @@ public class EmployeeController {
         pagingData.setTotal(employeePage.getTotalElements());
         pagingData.setTotalPages(employeePage.getTotalPages());
         return pagingData;
+    }
+
+    @PostMapping("/save")
+    public @ResponseBody
+    boolean saveEmployee(@RequestBody EmployeeDto employeeDto) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        return employeeService.save(employee);
     }
 } 

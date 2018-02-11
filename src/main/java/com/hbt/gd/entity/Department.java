@@ -20,7 +20,7 @@ public class Department  implements Serializable {
     @Column(name = "name")
     private String name;
     @Column(name = "parent_id")
-    private long parentId;
+    private Long parentId;
     @Column(name = "create_by")
     private String createBy;
     @Column(name = "update_by")
@@ -56,11 +56,15 @@ public class Department  implements Serializable {
         this.name = name;
     }
 
-    public long getParentId() {
+    public Long getParentId() {
+        if(null == parentId)
+            parentId = 0l;
         return parentId;
     }
 
-    public void setParentId(long parentId) {
+    public void setParentId(Long parentId) {
+        if(null == parentId)
+            parentId = 0l;
         this.parentId = parentId;
     }
 

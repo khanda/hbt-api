@@ -7,20 +7,20 @@ import java.util.Date;
  * Created by quyen on 05/02/2018.
  */
 public class DepartmentDto implements Serializable {
-    private long id;
+    private Long id;
     private String name;
-    private long parentId;
+    private Long parentId;
     private String createBy;
     private String updateBy;
     private Date create_date;
     private Date update_date;
     private int status;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -32,11 +32,11 @@ public class DepartmentDto implements Serializable {
         this.name = name;
     }
 
-    public long getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(long parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

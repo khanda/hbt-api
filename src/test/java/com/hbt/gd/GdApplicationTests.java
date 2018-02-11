@@ -1,9 +1,6 @@
 package com.hbt.gd;
 
-import com.hbt.gd.controller.EmployeeController;
 import com.hbt.gd.entity.Employee;
-import com.hbt.gd.helper.PagingData;
-import com.hbt.gd.helper.PagingParameter;
 import com.hbt.gd.service.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +21,7 @@ public class GdApplicationTests {
 
     @Test
     public void getListEmployee() {
-        Page<Employee> employeePage = employeeService.getListEmployee(0,10);
+        Page<Employee> employeePage = employeeService.getList(0,10);
 
         return;
     }

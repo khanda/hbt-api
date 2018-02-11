@@ -16,10 +16,16 @@ public class UserRoleDto implements Serializable {
     }
 
     public Long getId() {
+        if(null == id){
+            return 0l;
+        }
         return id;
     }
 
     public void setId(Long id) {
+        if(null == id){
+            this.id = 0l;
+        }
         this.id = id;
     }
 

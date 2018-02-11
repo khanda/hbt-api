@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "employee")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createDate", "updateDate"}, allowGetters = true)
-public class Employee  implements Serializable {
+public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -63,6 +63,8 @@ public class Employee  implements Serializable {
     }
 
     public void setId(Long id) {
+        if (null == id)
+            this.id = 0l;
         this.id = id;
     }
 
@@ -184,5 +186,27 @@ public class Employee  implements Serializable {
 
     public void setAccount(CoreUser account) {
         this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", midName='" + midName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", departmentId=" + departmentId +
+                ", code='" + code + '\'' +
+                ", accountId=" + accountId +
+                ", managerId=" + managerId +
+                ", isLeader=" + isLeader +
+                ", createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", status=" + status +
+                ", department=" + department +
+                ", account=" + account +
+                '}';
     }
 }

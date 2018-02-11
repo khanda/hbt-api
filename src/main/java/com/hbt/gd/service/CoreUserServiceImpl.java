@@ -41,8 +41,6 @@ public class CoreUserServiceImpl implements CoreUserService {
                 CoreUser user = userRepository.save(coreUser);
                 logger.info("save success: " + user.toString());
             }
-
-
         } catch (Exception e) {
             logger.error("save error", e);
             return false;

@@ -16,7 +16,7 @@ import java.util.Date;
 public class CoreUser implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     @Column(name = "username")
     private String userName;
     @Column

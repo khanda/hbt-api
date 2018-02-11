@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class UserRole  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     @Column
     private String name;
     @Column
