@@ -46,11 +46,11 @@ public class Employee implements Serializable {
     private Date updateDate;
     @Column(name = "status")
     private Integer status;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id", insertable = false, updatable = false)
     @JsonIgnore
     private Department department;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id", insertable = false, updatable = false)
     @JsonIgnore
     private CoreUser account;

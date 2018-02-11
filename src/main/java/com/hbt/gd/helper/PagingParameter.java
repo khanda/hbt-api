@@ -1,8 +1,9 @@
 package com.hbt.gd.helper;
 
-public class PagingParameter {
+public class PagingParameter<T> {
     private Integer page;
     private Integer pageSize;
+    private T filterData;
 
     public PagingParameter() {
     }
@@ -26,5 +27,13 @@ public class PagingParameter {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public T getFilterData() {
+        return filterData;
+    }
+
+    public void setFilterData(T filterData) {
+        this.filterData = filterData;
     }
 }

@@ -1,8 +1,9 @@
 package com.hbt.gd.service;
 
 import com.hbt.gd.controller.CoreUserController;
-import com.hbt.gd.entity.CoreUser;
+import com.hbt.gd.dto.EmployeeDto;
 import com.hbt.gd.entity.Employee;
+import com.hbt.gd.helper.PagingData;
 import com.hbt.gd.reposity.EmployeeRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * leader
@@ -28,6 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         int pageIndex = page - 1;
         Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
         Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
+
         return employeeRepository.findAll(pageable);
     }
 
@@ -58,5 +62,15 @@ public class EmployeeServiceImpl implements EmployeeService {
             logger.error("Delete: ", e);
             return false;
         }
+    }
+
+    @Override
+    public PagingData<EmployeeDto> filter(int page, int pageSize, Employee employee) {
+        return employeeRepository.filterEmployees(page, pageSize, employee);
+    }
+
+    @Override
+    public List<EmployeeDto> getManagers(Long departmentId) {
+        return employeeRepository.getManagers(departmentId);
     }
 }

@@ -4,6 +4,7 @@ import com.hbt.gd.dto.EmployeeDto;
 import com.hbt.gd.entity.Employee;
 import com.hbt.gd.helper.PagingData;
 import com.hbt.gd.helper.PagingParameter;
+import com.hbt.gd.mapper.EmployeeMapper;
 import com.hbt.gd.service.EmployeeService;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
@@ -11,7 +12,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,7 +25,8 @@ import java.util.List;
 @RequestMapping(value = "/api/employee",
         produces = {
                 MediaType.APPLICATION_JSON_VALUE,
-                MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+                MediaType.APPLICATION_FORM_URLENCODED_VALUE
+        }, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class EmployeeController {
     private final static Logger logger = Logger.getLogger(EmployeeController.class);
     @Autowired
@@ -72,4 +73,28 @@ public class EmployeeController {
         return employeeService.delete(id);
     }
 
-} 
+    @PostMapping("/filter")
+    public @ResponseBody
+    PagingData<EmployeeDto> filterEmployee(@RequestBody PagingParameter<EmployeeDto> pagingParameter) {
+        Integer page = pagingParameter.getPage();
+        Integer pageSize = pagingParameter.getPageSize();
+        Employee employee = EmployeeMapper.toEntity(pagingParameter.getFilterData());
+        try {
+            return employeeService.filter(page, pageSize, employee);
+        } catch (Exception e) {
+            logger.error("EmployeeController: filterEmployee", e);
+        }
+        return null;
+    }
+
+    @PostMapping("/managers")
+    public @ResponseBody
+    List<EmployeeDto> getManagers(@RequestBody Long departmentId) {
+        try {
+            return employeeService.getManagers(departmentId);
+        } catch (Exception e) {
+            logger.error("EmployeeController: getManagers", e);
+        }
+        return null;
+    }
+}
