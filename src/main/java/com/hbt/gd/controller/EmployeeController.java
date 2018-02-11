@@ -65,4 +65,11 @@ public class EmployeeController {
         Employee employee = modelMapper.map(employeeDto, Employee.class);
         return employeeService.save(employee);
     }
+
+    @PostMapping("/delete")
+    public @ResponseBody
+    boolean deleteEmployee(@RequestBody Long id) {
+        return employeeService.delete(id);
+    }
+
 } 

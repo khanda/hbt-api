@@ -1,6 +1,7 @@
 package com.hbt.gd.service;
 
 import com.hbt.gd.controller.CoreUserController;
+import com.hbt.gd.entity.CoreUser;
 import com.hbt.gd.entity.Employee;
 import com.hbt.gd.reposity.EmployeeRepository;
 import org.apache.log4j.Logger;
@@ -42,5 +43,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         logger.info("EmployeeServiceImpl: save()." + employee.toString());
         return true;
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        Employee employee = employeeRepository.findOne(id);
+        if (employee == null)
+            return false;
+        try {
+            employee.setStatus(0);
+            employeeRepository.save(employee);
+            return true;
+        } catch (Exception e) {
+            logger.error("Delete: ", e);
+            return false;
+        }
     }
 }

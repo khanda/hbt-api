@@ -9,4 +9,5 @@ import org.springframework.data.domain.Page;
 public interface EmployeeService {
     Page<Employee> getList(int page, int pageSize);
     boolean save(Employee employee );
+    boolean delete(Long id);
 }
