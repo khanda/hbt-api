@@ -33,6 +33,7 @@ public class CoreUserServiceImpl implements CoreUserService {
             //update
             if (userOriginal != null) {
                 userOriginal.setRoleId(coreUser.getRoleId());
+                userOriginal.setUpdateBy(coreUser.getUpdateBy());
                 CoreUser user = userRepository.save(userOriginal);
                 logger.info("save success: " + user.toString());
             }
