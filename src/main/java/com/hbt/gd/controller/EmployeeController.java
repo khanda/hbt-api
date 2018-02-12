@@ -79,22 +79,12 @@ public class EmployeeController {
         Integer page = pagingParameter.getPage();
         Integer pageSize = pagingParameter.getPageSize();
         Employee employee = EmployeeMapper.toEntity(pagingParameter.getFilterData());
-        try {
-            return employeeService.filter(page, pageSize, employee);
-        } catch (Exception e) {
-            logger.error("EmployeeController: filterEmployee", e);
-        }
-        return null;
+        return employeeService.filter(page, pageSize, employee);
     }
 
     @PostMapping("/managers")
     public @ResponseBody
     List<EmployeeDto> getManagers(@RequestBody Long departmentId) {
-        try {
-            return employeeService.getManagers(departmentId);
-        } catch (Exception e) {
-            logger.error("EmployeeController: getManagers", e);
-        }
-        return null;
+        return employeeService.getManagers(departmentId);
     }
 }
