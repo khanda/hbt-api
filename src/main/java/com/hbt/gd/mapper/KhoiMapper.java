@@ -1,7 +1,7 @@
 package com.hbt.gd.mapper;
 
-import com.hbt.gd.dto.EmployeeDto;
-import com.hbt.gd.entity.Employee;
+import com.hbt.gd.dto.KhoiDto;
+import com.hbt.gd.entity.Khoi;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -9,43 +9,43 @@ import org.modelmapper.convention.MatchingStrategies;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeMapper {
+public class KhoiMapper {
     private static ModelMapper modelMapper = new ModelMapper();
-    private final static Logger logger = Logger.getLogger(EmployeeMapper.class);
+    private final static Logger logger = Logger.getLogger(KhoiMapper.class);
     static {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
-    public EmployeeMapper() {
+    public KhoiMapper() {
 
     }
 
-    public static Employee toEntity(EmployeeDto dto) {
-        return modelMapper.map(dto, Employee.class);
+    public static Khoi toEntity(KhoiDto dto) {
+        return modelMapper.map(dto, Khoi.class);
     }
 
-    public static EmployeeDto toDto(Employee bo) {
-        return modelMapper.map(bo, EmployeeDto.class);
+    public static KhoiDto toDto(Khoi bo) {
+        return modelMapper.map(bo, KhoiDto.class);
     }
 
-    public static List<Employee> toListEntity(List<EmployeeDto> listDto) {
+    public static List<Khoi> toListEntity(List<KhoiDto> listDto) {
         if (null != listDto && !listDto.isEmpty()) {
             try {
-                List<Employee> listEntity = new ArrayList<>();
+                List<Khoi> listEntity = new ArrayList<>();
                 for (int i = 0; i < listEntity.size(); i++) {
                     listEntity.add(toEntity(listDto.get(i)));
                 }
                 return listEntity;
             } catch (Exception e) {
-                logger.error("EmployeeMapper:toListBo", e);
+                logger.error("KhoiMapper:toListBo", e);
             }
         }
         return new ArrayList<>();
     }
 
-    public static List<EmployeeDto> toListDto(List<Employee> listEntity) {
+    public static List<KhoiDto> toListDto(List<Khoi> listEntity) {
         if (null != listEntity && !listEntity.isEmpty()) {
             try {
-                List<EmployeeDto> listDto = new ArrayList<>();
+                List<KhoiDto> listDto = new ArrayList<>();
                 for (int i = 0; i < listEntity.size(); i++) {
                     listDto.add(toDto(listEntity.get(i)));
                 }

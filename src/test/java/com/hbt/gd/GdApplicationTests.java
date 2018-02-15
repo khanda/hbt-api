@@ -1,9 +1,10 @@
 package com.hbt.gd;
 
 import com.hbt.gd.dto.EmployeeDto;
+import com.hbt.gd.dto.KhoiDto;
 import com.hbt.gd.entity.Employee;
-import com.hbt.gd.helper.PagingData;
 import com.hbt.gd.service.EmployeeService;
+import com.hbt.gd.service.KhoiService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.List;
 public class GdApplicationTests {
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    KhoiService khoiService;
 
     @Test
     public void contextLoads() {
@@ -40,4 +43,10 @@ public class GdApplicationTests {
         List<EmployeeDto> l = employeeService.getManagers(1l);
         return;
     }
+    @Test
+    public void getKhois() {
+        List<KhoiDto> khois = khoiService.getList();
+        return;
+    }
+
 }
