@@ -2,6 +2,7 @@ package com.hbt.gd.service;
 
 import com.hbt.gd.dto.KhoiDto;
 import com.hbt.gd.entity.Khoi;
+import com.hbt.gd.mapper.KhoiMapper;
 import com.hbt.gd.reposity.KhoiRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ public class KhoiServiceImpl implements KhoiService {
     private final static Logger logger = Logger.getLogger(KhoiServiceImpl.class);
 
     @Override
-    public boolean save(Khoi khoi) {
+    public KhoiDto save(Khoi khoi) {
         try {
-            khoiRepository.save(khoi);
-            return true;
+            Khoi savedKhoi = khoiRepository.save(khoi);
+            return KhoiMapper.toDto(savedKhoi);
         } catch (Exception e) {
             logger.error("KhoiServiceImpl: save", e);
         }
-        return false;
+        return new KhoiDto();
     }
 
     @Override
@@ -33,4 +34,5 @@ public class KhoiServiceImpl implements KhoiService {
         List<Khoi> khois = khoiRepository.getList();
         return toListDto(khois);
     }
+
 }

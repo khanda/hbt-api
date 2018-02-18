@@ -6,8 +6,8 @@ import com.hbt.gd.entity.Khoi;
 import java.util.List;
 
 public interface KhoiService {
-    boolean save(Khoi khoi);
+    KhoiDto save(Khoi khoi);
 
     List<KhoiDto> getList();
 
-} 
+}

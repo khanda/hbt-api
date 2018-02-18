@@ -1,14 +1,12 @@
 package com.hbt.gd.controller;
 
 import com.hbt.gd.dto.KhoiDto;
+import com.hbt.gd.entity.Khoi;
 import com.hbt.gd.service.KhoiService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -21,6 +19,11 @@ public class KhoiController {
     @PostMapping("/getList")
     public Iterable<KhoiDto> getList() {
         return khoiService.getList();
+    }
+
+    @PostMapping("/save")
+    public KhoiDto save(@RequestBody Khoi khoi) {
+        return khoiService.save(khoi);
     }
 
 }
