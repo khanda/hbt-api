@@ -27,4 +27,8 @@ public class KhoiController {
         return khoiService.save(khoi);
     }
 
+    @PostMapping("/deleteLeader")
+    public boolean sdeleteLeader(@RequestBody Khoi khoi) throws HBTException {
+        return khoiService.deleteLeader(khoi);
+    }
 }

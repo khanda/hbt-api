@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface KhoiService {
     KhoiDto save(Khoi khoi) throws HBTException;
+    boolean deleteLeader(Khoi khoi) throws HBTException;
 
     List<KhoiDto> getList();
 

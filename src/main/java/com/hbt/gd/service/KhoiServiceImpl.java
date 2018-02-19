@@ -38,6 +38,17 @@ public class KhoiServiceImpl implements KhoiService {
         return KhoiMapper.toDto(savedKhoi);
     }
 
+    @Override
+    public boolean deleteLeader(Khoi khoi) throws HBTException {
+        Khoi khoi1 = khoiRepository.findOne(khoi.getId());
+        if (khoi1 != null) {
+            khoi1.setLeaderId(null);
+            khoiRepository.save(khoi1);
+            return true;
+        }
+        return false;
+    }
+
     private boolean isLeaderAssigned(Khoi khoi) {
         return khoiRepository.isLeaderAssigned(khoi.getLeaderId());
     }
