@@ -49,4 +49,10 @@ public class GdApplicationTests {
         return;
     }
 
+    @Test
+    public void isLeaderAssigned() {
+        List<KhoiDto> khois = khoiService.getList();
+        return;
+    }
+
 }

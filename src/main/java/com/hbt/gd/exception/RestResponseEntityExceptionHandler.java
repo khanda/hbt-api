@@ -20,4 +20,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
+    @ExceptionHandler(value = {HBTException.class})
+    protected ResponseEntity<Object> handleHBTException(HBTException ex, WebRequest request) {
+        ErrorInfo errorInfo = new ErrorInfo(ex.getCodeString());
+        return handleExceptionInternal(ex, errorInfo, new HttpHeaders(), ex.getCode(), request);
+    }
 }

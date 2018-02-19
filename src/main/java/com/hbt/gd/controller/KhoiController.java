@@ -2,6 +2,7 @@ package com.hbt.gd.controller;
 
 import com.hbt.gd.dto.KhoiDto;
 import com.hbt.gd.entity.Khoi;
+import com.hbt.gd.exception.HBTException;
 import com.hbt.gd.service.KhoiService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class KhoiController {
     }
 
     @PostMapping("/save")
-    public KhoiDto save(@RequestBody Khoi khoi) {
+    public KhoiDto save(@RequestBody Khoi khoi) throws HBTException {
         return khoiService.save(khoi);
     }
 
