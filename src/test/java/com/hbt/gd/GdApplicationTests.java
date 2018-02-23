@@ -34,7 +34,7 @@ public class GdApplicationTests {
 
     @Test
     public void filterEmployee() {
-        employeeService.filter(0, 5, new Employee());
+        employeeService.filter(1, 10, "H");
         return;
     }
 

@@ -14,6 +14,6 @@ public interface EmployeeService {
     Page<Employee> getList(int page, int pageSize);
     boolean save(Employee employee );
     boolean delete(Long id);
-    PagingData<EmployeeDto> filter(int page, int pageSize, Employee employee);
+    PagingData<EmployeeDto> filter(int page, int pageSize, String searchTerm);
     List<EmployeeDto> getManagers(Long departmentId);
 }

@@ -10,6 +10,6 @@ import java.util.List;
  * Created by quyen on 05/02/2018.
  */
 public interface EmployeeRepositoryCustom {
-    PagingData<EmployeeDto> filterEmployees(int page, int pageSize, Employee employee);
+    PagingData<EmployeeDto> filterEmployees(int page, int pageSize, String searchTerm);
     List<EmployeeDto> getManagers(Long departmentId);
 } 

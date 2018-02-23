@@ -65,8 +65,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public PagingData<EmployeeDto> filter(int page, int pageSize, Employee employee) {
-        return employeeRepository.filterEmployees(page, pageSize, employee);
+    public PagingData<EmployeeDto> filter(int page, int pageSize, String searchTerm) {
+        return employeeRepository.filterEmployees(page, pageSize, searchTerm);
     }
 
     @Override

@@ -19,10 +19,16 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public PagingData<EmployeeDto> filterEmployees(int page, int pageSize, Employee employee) {
+    public PagingData<EmployeeDto> filterEmployees(int page, int pageSize, String searchTerm) {
         PagingData<EmployeeDto> pagingData = new PagingData<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT e FROM Employee e WHERE e.status = 1 ORDER BY e.id ");
+        stringBuilder.append("SELECT e FROM Employee e WHERE e.status = 1 ");
+        if(searchTerm != null && !searchTerm.trim().isEmpty()){
+            stringBuilder.append(" AND (");
+            stringBuilder.append(" LOWER(e.firstName) like '%" + searchTerm + "%'");
+            stringBuilder.append(" )");
+        }
+        stringBuilder.append(" ORDER BY e.id");
         TypedQuery<Employee> typedQuery = entityManager.createQuery(stringBuilder.toString(), Employee.class);
         int first = (page - 1) * pageSize;
         typedQuery.setFirstResult(first);
@@ -30,10 +36,16 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
         List<Employee> employees = typedQuery.getResultList();
         //count
         stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT count(e.id) FROM Employee e WHERE e.status = 1 ORDER BY e.id ");
+        stringBuilder.append("SELECT count(e.id) FROM Employee e WHERE e.status = 1 ");
+        if(searchTerm != null && !searchTerm.trim().isEmpty()){
+            stringBuilder.append(" AND (");
+            stringBuilder.append(" LOWER(e.firstName) like '%" + searchTerm + "%'");
+            stringBuilder.append(" )");
+        }
+        stringBuilder.append(" ORDER BY e.id");
         Query countQuery = entityManager.createQuery(stringBuilder.toString());
-        long count = (long) countQuery.getSingleResult();
 
+        long count = (long) countQuery.getSingleResult();
         pagingData.setData(EmployeeMapper.toListDto(employees));
         pagingData.setTotal(count);
         pagingData.setPage(page);

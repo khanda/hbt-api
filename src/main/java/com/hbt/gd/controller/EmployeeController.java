@@ -75,11 +75,12 @@ public class EmployeeController {
 
     @PostMapping("/filter")
     public @ResponseBody
-    PagingData<EmployeeDto> filterEmployee(@RequestBody PagingParameter<EmployeeDto> pagingParameter) {
+    PagingData<EmployeeDto> filterEmployee(@RequestBody PagingParameter<String> pagingParameter) {
         Integer page = pagingParameter.getPage();
         Integer pageSize = pagingParameter.getPageSize();
-        Employee employee = EmployeeMapper.toEntity(pagingParameter.getFilterData());
-        return employeeService.filter(page, pageSize, employee);
+//        Employee employee = EmployeeMapper.toEntity(pagingParameter.getFilterData());
+        String searchTearm = pagingParameter.getFilterData();
+        return employeeService.filter(page, pageSize, searchTearm);
     }
 
     @PostMapping("/managers")
