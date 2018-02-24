@@ -2,12 +2,10 @@ package com.hbt.gd.reposity;
 
 import com.hbt.gd.dto.EmployeeDto;
 import com.hbt.gd.entity.Employee;
-import com.hbt.gd.helper.PagingData;
 import com.hbt.gd.mapper.EmployeeMapper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -17,44 +15,6 @@ import java.util.List;
 public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Override
-    public PagingData<EmployeeDto> filterEmployees(int page, int pageSize, String searchTerm) {
-        PagingData<EmployeeDto> pagingData = new PagingData<>();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT e FROM Employee e WHERE e.status = 1 ");
-        if(searchTerm != null && !searchTerm.trim().isEmpty()){
-            stringBuilder.append(" AND (");
-            stringBuilder.append(" LOWER(e.firstName) like '%" + searchTerm + "%'");
-            stringBuilder.append(" )");
-        }
-        stringBuilder.append(" ORDER BY e.id");
-        TypedQuery<Employee> typedQuery = entityManager.createQuery(stringBuilder.toString(), Employee.class);
-        int first = (page - 1) * pageSize;
-        typedQuery.setFirstResult(first);
-        typedQuery.setMaxResults(pageSize);
-        List<Employee> employees = typedQuery.getResultList();
-        //count
-        stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT count(e.id) FROM Employee e WHERE e.status = 1 ");
-        if(searchTerm != null && !searchTerm.trim().isEmpty()){
-            stringBuilder.append(" AND (");
-            stringBuilder.append(" LOWER(e.firstName) like '%" + searchTerm + "%'");
-            stringBuilder.append(" )");
-        }
-        stringBuilder.append(" ORDER BY e.id");
-        Query countQuery = entityManager.createQuery(stringBuilder.toString());
-
-        long count = (long) countQuery.getSingleResult();
-        pagingData.setData(EmployeeMapper.toListDto(employees));
-        pagingData.setTotal(count);
-        pagingData.setPage(page);
-        pagingData.setPageSize(pageSize);
-        int pageNumber = (int) ((count / pageSize) + 1);
-        pagingData.setTotalPages(pageNumber);
-
-        return pagingData;
-    }
 
     @Override
     public List<EmployeeDto> getManagers(Long departmentId) {
