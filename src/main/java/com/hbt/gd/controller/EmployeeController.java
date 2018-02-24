@@ -4,8 +4,11 @@ import com.hbt.gd.dto.EmployeeDto;
 import com.hbt.gd.entity.Employee;
 import com.hbt.gd.helper.PagingData;
 import com.hbt.gd.helper.PagingParameter;
+import com.hbt.gd.helper.SearchQueryBuilder;
+import com.hbt.gd.helper.ValidateString;
 import com.hbt.gd.mapper.EmployeeMapper;
 import com.hbt.gd.service.EmployeeService;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -75,12 +78,15 @@ public class EmployeeController {
 
     @PostMapping("/filter")
     public @ResponseBody
-    PagingData<EmployeeDto> filterEmployee(@RequestBody PagingParameter<String> pagingParameter) {
+    PagingData<EmployeeDto> filterEmployee(@RequestBody PagingParameter<String> pagingParameter) throws Exception {
         // page in ui start from 1
         Integer page = pagingParameter.getPage() - 1;
         Integer pageSize = pagingParameter.getPageSize();
-        String searchTerm = pagingParameter.getFilterData();
-        return employeeService.filter(page, pageSize, searchTerm);
+        String searchTerm = StringEscapeUtils.escapeJava(pagingParameter.getFilterData());
+        if(!ValidateString.isValidSearchQuery(searchTerm)){
+            throw new Exception();
+        }
+        return employeeService.filter(page, pageSize, SearchQueryBuilder.getEmployeeSearchQuery(searchTerm));
     }
 
     @PostMapping("/managers")

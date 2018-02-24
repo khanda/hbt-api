@@ -98,7 +98,7 @@ public class GdApplicationTests {
         String search = "firstName:l,lastName:l,midName:L";
 
         EmployeeSpecificationsBuilder builder = new EmployeeSpecificationsBuilder();
-        Pattern pattern = Pattern.compile(MyConstant.searchPatern);
+        Pattern pattern = Pattern.compile(MyConstant.cretialSearchParten);
         Matcher matcher = pattern.matcher(search + ",");
         while (matcher.find()) {
             builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
