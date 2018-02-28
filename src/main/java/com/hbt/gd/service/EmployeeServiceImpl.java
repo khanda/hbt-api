@@ -17,7 +17,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,7 +46,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean save(Employee employee) {
         employee.setStatus(1);
-        employee.setId(0l);
+        if(employee.getId() == null){
+            employee.setId(0L);
+        }
+        if (employee.getAccount() != null) {
+            employee.setAccount(null);
+        }
+        if (employee.getDepartment() != null) {
+            employee.setDepartment(null);
+        }
         try {
             employeeRepository.save(employee);
         } catch (Exception e) {
@@ -83,7 +93,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Specification<Employee> spec = builder.build(true);
         Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
         Pageable pageable = new PageRequest(page, pageSize, sort);
-        Page<Employee> employeePage = employeeRepository.findAll(spec,pageable);
+        Page<Employee> employeePage = employeeRepository.findAll(spec, pageable);
 
         pagingData.setData(EmployeeMapper.toListDto(employeePage.getContent()));
         pagingData.setTotal(employeePage.getTotalElements());
@@ -97,5 +107,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeDto> getManagers(Long departmentId) {
         return employeeRepository.getManagers(departmentId);
+    }
+
+    @Override
+    public Long generateEmployeeCode() {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        Optional<Long> max = employeeRepository.getMaxEmployeeCode();
+        Long newCode;
+        if (max.isPresent()) {
+            Long latestCode = max.get();
+            int codeYear = extractYearFromCode(latestCode);
+            if (codeYear == currentYear) {
+                newCode = latestCode + 1;
+            } else {
+                newCode = (long) (currentYear * 10000);
+            }
+        } else {
+            newCode = (long) (currentYear * 10000);
+        }
+        return newCode;
+    }
+
+    private int extractYearFromCode(Long latestCode) {
+        String codeString = String.valueOf(latestCode);
+        return Integer.parseInt(codeString.substring(0, 4));
     }
 }

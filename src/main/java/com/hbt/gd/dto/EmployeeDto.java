@@ -12,7 +12,7 @@ public class EmployeeDto implements Serializable {
     private String midName;
     private String lastName;
     private Long departmentId;
-    private String code;
+    private Long code;
     private Long accountId;
     private Long managerId;
     private Integer isLeader;
@@ -64,11 +64,11 @@ public class EmployeeDto implements Serializable {
         this.departmentId = departmentId;
     }
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 

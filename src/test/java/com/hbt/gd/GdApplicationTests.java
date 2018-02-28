@@ -120,4 +120,10 @@ public class GdApplicationTests {
         PagingData<EmployeeDto> employeePagingData = employeeService.filter(0, 10, search);
         return;
     }
+
+    @Test
+    public void testGenerateCode(){
+        Long code = employeeService.generateEmployeeCode();
+        return;
+    }
 }

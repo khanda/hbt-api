@@ -67,6 +67,7 @@ public class EmployeeController {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         Employee employee = modelMapper.map(employeeDto, Employee.class);
+        employee.setCode(employeeService.generateEmployeeCode());
         return employeeService.save(employee);
     }
 

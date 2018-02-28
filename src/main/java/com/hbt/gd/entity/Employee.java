@@ -27,7 +27,7 @@ public class Employee implements Serializable {
     @Column(name = "department_id")
     private Long departmentId;
     @Column(name = "code")
-    private String code;
+    private Long code;
     @Column(name = "account_id")
     private Long accountId;
     @Column(name = "manager_id")
@@ -64,7 +64,7 @@ public class Employee implements Serializable {
 
     public void setId(Long id) {
         if (null == id)
-            this.id = 0l;
+            this.id = 0L;
         this.id = id;
     }
 
@@ -100,11 +100,11 @@ public class Employee implements Serializable {
         this.departmentId = departmentId;
     }
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 
