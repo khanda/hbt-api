@@ -10,11 +10,20 @@ public class DepartmentDto implements Serializable {
     private Long id;
     private String name;
     private Long parentId;
+    private Long leaderId;
     private String createBy;
     private String updateBy;
     private Date create_date;
     private Date update_date;
     private int status;
+
+    public Long getLeaderId() {
+        return leaderId;
+    }
+
+    public void setLeaderId(Long leaderId) {
+        this.leaderId = leaderId;
+    }
 
     public Long getId() {
         return id;

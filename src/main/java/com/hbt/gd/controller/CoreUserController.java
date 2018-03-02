@@ -85,6 +85,10 @@ public class CoreUserController {
 
         List<CoreUser> coreUsers = userService.getListCoreUser(page, itemPerPage);
 
+        for (CoreUser coreUser: coreUsers) {
+            coreUser.setPassword("");
+        }
+
         Long count = userService.getListCoreUserCount(page, itemPerPage);
 
         pagingData.setData(coreUsers);

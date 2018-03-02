@@ -90,9 +90,9 @@ public class EmployeeController {
         return employeeService.filter(page, pageSize, SearchQueryBuilder.getEmployeeSearchQuery(searchTerm));
     }
 
-    @PostMapping("/managers")
-    public @ResponseBody
-    List<EmployeeDto> getManagers(@RequestBody Long departmentId) {
-        return employeeService.getManagers(departmentId);
-    }
+//    @PostMapping("/managers")
+//    public @ResponseBody
+//    List<EmployeeDto> getManagers(@RequestBody Long departmentId) {
+//        return employeeService.getManagers(departmentId);
+//    }
 }

@@ -104,10 +104,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return pagingData;
     }
 
-    @Override
-    public List<EmployeeDto> getManagers(Long departmentId) {
-        return employeeRepository.getManagers(departmentId);
-    }
+//    @Override
+//    public List<EmployeeDto> getManagers(Long departmentId) {
+//        return employeeRepository.getManagers(departmentId);
+//    }
 
     @Override
     public Long generateEmployeeCode() {

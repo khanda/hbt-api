@@ -15,6 +15,6 @@ public interface EmployeeService {
     boolean save(Employee employee );
     boolean delete(Long id);
     PagingData<EmployeeDto> filter(int page, int pageSize, String searchTerm);
-    List<EmployeeDto> getManagers(Long departmentId);
+//    List<EmployeeDto> getManagers(Long departmentId);
     Long generateEmployeeCode();
 }

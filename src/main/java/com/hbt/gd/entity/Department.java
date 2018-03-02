@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name = "department")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createDate", "updateDate"}, allowGetters = true)
-public class Department  implements Serializable {
+public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,6 +21,8 @@ public class Department  implements Serializable {
     private String name;
     @Column(name = "parent_id")
     private Long parentId;
+    @Column(name = "leader_id")
+    private Long leaderId;
     @Column(name = "create_by")
     private String createBy;
     @Column(name = "update_by")
@@ -40,6 +42,14 @@ public class Department  implements Serializable {
     public Department() {
     }
 
+    public Long getLeaderId() {
+        return leaderId;
+    }
+
+    public void setLeaderId(Long leaderId) {
+        this.leaderId = leaderId;
+    }
+
     public Long getId() {
         return id;
     }
@@ -57,13 +67,13 @@ public class Department  implements Serializable {
     }
 
     public Long getParentId() {
-        if(null == parentId)
+        if (null == parentId)
             parentId = 0l;
         return parentId;
     }
 
     public void setParentId(Long parentId) {
-        if(null == parentId)
+        if (null == parentId)
             parentId = 0l;
         this.parentId = parentId;
     }

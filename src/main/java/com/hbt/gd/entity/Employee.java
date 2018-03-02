@@ -30,10 +30,6 @@ public class Employee implements Serializable {
     private Long code;
     @Column(name = "account_id")
     private Long accountId;
-    @Column(name = "manager_id")
-    private Long managerId;
-    @Column(name = "is_leader")
-    private Integer isLeader;
     @Column(name = "create_by")
     private String createBy;
     @Column(name = "update_by")
@@ -116,22 +112,6 @@ public class Employee implements Serializable {
         this.accountId = accountId;
     }
 
-    public Long getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(Long managerId) {
-        this.managerId = managerId;
-    }
-
-    public Integer getIsLeader() {
-        return isLeader;
-    }
-
-    public void setIsLeader(Integer isLeader) {
-        this.isLeader = isLeader;
-    }
-
     public String getCreateBy() {
         return createBy;
     }
@@ -198,8 +178,6 @@ public class Employee implements Serializable {
                 ", departmentId=" + departmentId +
                 ", code='" + code + '\'' +
                 ", accountId=" + accountId +
-                ", managerId=" + managerId +
-                ", isLeader=" + isLeader +
                 ", createBy='" + createBy + '\'' +
                 ", updateBy='" + updateBy + '\'' +
                 ", createDate=" + createDate +

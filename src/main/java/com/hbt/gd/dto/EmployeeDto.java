@@ -14,8 +14,6 @@ public class EmployeeDto implements Serializable {
     private Long departmentId;
     private Long code;
     private Long accountId;
-    private Long managerId;
-    private Integer isLeader;
     private String createBy;
     private String updateBy;
     private Date createDate;
@@ -78,22 +76,6 @@ public class EmployeeDto implements Serializable {
 
     public void setAccountId(Long accountId) {
         this.accountId = accountId;
-    }
-
-    public Long getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(Long managerId) {
-        this.managerId = managerId;
-    }
-
-    public Integer getIsLeader() {
-        return isLeader;
-    }
-
-    public void setIsLeader(Integer isLeader) {
-        this.isLeader = isLeader;
     }
 
     public String getCreateBy() {
